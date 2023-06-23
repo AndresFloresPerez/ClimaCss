@@ -165,7 +165,7 @@ input:focus {
   color: white;
 }
 input::placeholder{
-  color: white;
+  color: rgb(171, 34, 34);
 }
 .city_interno_days{
   display: flex;
