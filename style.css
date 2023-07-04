@@ -62,11 +62,16 @@
   justify-content: center;
  
 }
+.weather2conteiner{
+  display: flex;
+  width: 60%;
+ height: 100%;
+}
 .weather2{
   /* background-color: rgb(42, 180, 84); */
   display: flex;
   align-items: center;
-  width: 12%;
+  width: 20%;
   height: 100%;
   flex-flow: column;
   border-left: inset;

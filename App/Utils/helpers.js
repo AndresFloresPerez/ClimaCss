@@ -1,9 +1,28 @@
 export const getDateFromTimestamp = (timestamp) => {
   const days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+  const months = [
+    'JAN',
+    'FEB',
+    'MAR',
+    'MAY',
+    'JUN',
+    'JUL',
+    'AUG',
+    'SEP',
+    'OCT',
+    'NOV',
+    'DEC'
+  ]
   const currentDate = new Date(timestamp * 1000)
   const day = days[currentDate.getDay()]
+  const month = months[currentDate.getMonth()]
 
-  return `${day}`
+  return `${day} / ${month}  ${currentDate.getDate()} `
+}
+
+export const getHourTimestamp = (timestamp) => {
+  const hour = new Date(timestamp * 1000)
+  return hour.toLocaleString('en-US', { hour: 'numeric', hour12: true })
 }
 
 export const tempConvertion = (temp) => {

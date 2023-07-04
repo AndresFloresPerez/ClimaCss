@@ -16,3 +16,17 @@ export const getWeather = async (city) => {
     console.error('Error API getWeather => ', error)
   }
 }
+export const getForecast = async (lat, lon) => {
+  try {
+    const response = await fetch(
+      `${OpenWeatherURL}forecast?lat=${lat}&lon=${lon}&appid=${OpenWeatherKey}`
+    )
+    if (!response.ok) {
+      console.error('Error al consultar getForecast', response.statusText)
+    }
+
+    return await response.json()
+  } catch (error) {
+    console.error('Error API getForecast => ', error)
+  }
+}
