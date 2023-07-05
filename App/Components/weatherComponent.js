@@ -1,6 +1,8 @@
+import { getImage } from '../Services/unsplashAPI'
 import { getForecast, getWeather } from '../Services/weatherAPI'
 import {
   getDateFromTimestamp,
+  getDateHourTimestamp,
   getHourTimestamp,
   getIconoOpenWeather,
   tempConvertion
@@ -15,19 +17,23 @@ const buildCurrenWeather = ({ main, weather, dt, wind }) => {
     lblHumidity,
     lblFeels,
     lblWind,
-    lblRain
+    lblRain,
+    horadate
   ] = [
     document.getElementById('currentWeatherTemp'),
     document.getElementById('currentWeatherDay'),
-    document.getElementsByClassName('weather_date_icons'),
+    ...document.getElementsByClassName('weather_date_icons'),
     document.getElementById('lblHumidity'),
     document.getElementById('lblFeels'),
     document.getElementById('lblWind'),
-    document.getElementById('lblRain')
+    document.getElementById('lblRain'),
+    ...document.getElementsByClassName('horadate')
   ]
 
   tempElement.innerHTML = tempConvertion(main.temp)
   dayInfoElement.innerHTML = `${getDateFromTimestamp(dt)}  `
+  horadate.innerHTML = `${getDateHourTimestamp(dt)}  `
+
   currentIconsElement.innerHTML = `<i class="${getIconoOpenWeather(
     weather[0].main
   )}"></i> </i>
@@ -35,9 +41,9 @@ const buildCurrenWeather = ({ main, weather, dt, wind }) => {
   lblHumidity.innerHTML = `${main.humidity}`
   lblFeels.innerHTML = `${tempConvertion(main.feels_like)}`
   lblWind.innerHTML = ` ${wind.speed} mph`
-  lblRain.innerHTML = `Min:${tempConvertion(
+  lblRain.innerHTML = `Min: ${tempConvertion(
     main.temp_min
-  )}  Max:${tempConvertion(main.temp_max)}`
+  )}  Max: ${tempConvertion(main.temp_max)}`
 }
 
 const buildWeatherInfo = (data) => {
@@ -70,6 +76,23 @@ const buildForecast = ({ list }) => {
   watherconteiner.innerHTML = forecastelement
 }
 
+const getImageBackground = async (city) => {
+  const response = await getImage(city)
+  console.log(response)
+  if (response.total === '404') {
+    console.log(response)
+    return
+  }
+  const image =
+    response.results[Math.floor(Math.random() * (9 + 1))].urls.regular
+  const [bodyelement, bannerelement] = [
+    ...document.querySelectorAll('body'),
+    ...document.querySelectorAll('.city')
+  ]
+  bodyelement.style.backgroundImage = `url(${image})`
+  bannerelement.style.backgroundImage = `url(${image})`
+}
+
 const getForecastinfo = async ({ coord }) => {
   const response = await getForecast(coord.lat, coord.lon)
   if (response.cod === '404') {
@@ -98,4 +121,5 @@ export const searchInit = async (e) => {
 
   buildWeatherInfo(response)
   await getForecastinfo(response)
+  await getImageBackground(textSearch)
 }
