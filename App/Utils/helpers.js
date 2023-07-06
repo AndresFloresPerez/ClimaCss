@@ -24,7 +24,10 @@ export const getHourTimestamp = (timestamp) => {
   const hour = new Date(timestamp * 1000)
   return hour.toLocaleString('en-US', { hour: 'numeric', hour12: true })
 }
-
+export const getDateHourTimestamp = (timestamp) => {
+  const hour = new Date(timestamp * 1000)
+  return hour.toLocaleTimeString('en-US')
+}
 export const tempConvertion = (temp) => {
   return `${Math.round(temp - 273.15)}°`
 }

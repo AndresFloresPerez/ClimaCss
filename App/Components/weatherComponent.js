@@ -84,7 +84,8 @@ const getImageBackground = async (city) => {
     return
   }
   const image =
-    response.results[Math.floor(Math.random() * (9 + 1))].urls.regular
+    response.results[Math.floor(Math.random() * response.results.length)].urls
+      .regular
   const [bodyelement, bannerelement] = [
     ...document.querySelectorAll('body'),
     ...document.querySelectorAll('.city')
