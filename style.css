@@ -47,6 +47,7 @@
   width: 100%;
   height: 100%;
   flex-flow: row;
+  border-radius: 1% 1% 0 0;
 }
 .city{
   background-color: palegoldenrod;
@@ -56,6 +57,7 @@
   background-image: url("/img/bg.jpg");
   background-position: center;
   background-size: cover;
+  border-radius:0 0 1% 1% ;
 }
 .weather1{
   /* background-color: rgb(137, 192, 216); */
@@ -78,7 +80,7 @@
   width: 20%;
   height: 100%;
   flex-flow: column;
-  border-left: #c1bcbc7d solid 2px;
+  border-left: #c2c2c24a solid 3px;
 }
  
 .weather_date{
